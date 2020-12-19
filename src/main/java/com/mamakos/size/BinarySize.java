@@ -15,14 +15,17 @@ public class BinarySize {
         ///I’m storing 1,000,000 integers in a binary tree.
         // Roughly how many nodes and levels can I expect the tree to have?
         // Roughly how much space will it occupy on a 32-bit architecture?
-        int nodes = 7;
-        double levels = 1 + Math.floor(log2(nodes));
+        int nodes = 1_000;
+        int levels = getTreeLevels(nodes);
         System.out.println("For " + nodes + " integers stored in a binary tree. There will be " + nodes + " nodes, and " + levels + " levels in the tree.");
 
     }
-    public static int log2(int x)
-    {
-        return (int) (Math.log(x) / Math.log(2));
+    public static int getTreeLevels(int numNodes){
+        int levels = 1;
+        for (int i = numNodes; i > 1 ; i = (int)Math.floor(i/2)) {
+            levels++;
+        }
+        return levels;
     }
     public static void question2() {
         ///My town has approximately 20,000 residences.
