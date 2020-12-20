@@ -1,6 +1,7 @@
 package com.mamakos.size;
 
-import java.math.BigInteger;
+import javax.management.timer.Timer;
+import java.util.Date;
 
 public class BinarySize {
 
@@ -16,10 +17,20 @@ public class BinarySize {
         // Roughly how many nodes and levels can I expect the tree to have?
         // Roughly how much space will it occupy on a 32-bit architecture?
         int nodes = 1_000;
+        long start = new Date().getTime();
         int levels = getTreeLevels(nodes);
-        System.out.println("For " + nodes + " integers stored in a binary tree. There will be " + nodes + " nodes, and " + levels + " levels in the tree.");
+        long end = new Date().getTime();
+        long span = end - start;
+        System.out.println("For " + nodes + " integers stored in a binary tree. There will be " + nodes + " nodes, and " + levels + " levels in the tree. Loop method " + span + "ms");
+        BinaryTreeUtil binaryTreeUtil = new BinaryTreeUtil();
+        start = new Date().getTime();
+        levels = binaryTreeUtil.getTreeLevelsRecursive(14);
+        end = new Date().getTime();
+        span = end - start;
+        System.out.println("For " + nodes + " integers stored in a binary tree. There will be " + nodes + " nodes, and " + levels + " levels in the tree. Recursive method " + span + "ms");
 
     }
+
     public static int getTreeLevels(int numNodes){
         int levels = 1;
         for (int i = numNodes; i > 1 ; i = (int)Math.floor(i/2)) {
@@ -57,13 +68,13 @@ public class BinarySize {
         int MILLION = 1_000_000;
         int BILLION = 1_000_000_000;
         int TRILLION = 1_000_000_000;
-        long EightTrillion = 8_000_000_000L;
+        long EIGHT_TRILLION = 8_000_000_000L;
 
         System.out.println(getBinarySize(THOUSAND));
         System.out.println(getBinarySize(MILLION));
         System.out.println(getBinarySize(BILLION));
         System.out.println(getBinarySize(TRILLION));
-        System.out.println(getBinarySize(EightTrillion));
+        System.out.println(getBinarySize(EIGHT_TRILLION));
     }
 
     public static String getBinarySize(int i) {
